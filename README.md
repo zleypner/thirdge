@@ -1,6 +1,18 @@
-# Thirdge - Web3 Innovation Website
+# Third Age - Web3 Innovation & Blockchain Solutions
 
-A cyberpunk-themed website showcasing Thirdge's Web3 solutions, decentralization strategies, and blockchain education services.
+Third Age is a pioneering Web3 company dedicated to building the decentralized future through innovative products, professional services, and blockchain education.
+
+## About Third Age
+
+We empower individuals and organizations to embrace the decentralized economy by:
+
+- **Building Products**: Creating cutting-edge Web3 applications and decentralized solutions that leverage blockchain technology for real-world use cases
+- **Offering Services**: Providing comprehensive blockchain development, smart contract auditing, tokenomics design, and Web3 consulting services
+- **Enabling Instant Payments**: Implementing fast, secure, and borderless payment systems using blockchain technology
+- **Education**: Delivering in-depth blockchain education, workshops, and training programs to help developers and businesses understand and adopt Web3 technologies
+- **Decentralization**: Championing decentralization principles to create more transparent, secure, and user-owned digital ecosystems
+
+This cyberpunk-themed website showcases Third Age's Web3 solutions, decentralization strategies, and blockchain education services.
 
 ## Features
 
@@ -105,8 +117,8 @@ Using Google Fonts:
 
 ## Contact
 
-For inquiries about Thirdge services, use the contact button on the website or reach out directly.
+For inquiries about Third Age services, blockchain education programs, or partnership opportunities, use the contact button on the website or reach out directly.
 
 ---
 
-© 2025 Thirdge. Building the decentralized future.
+© 2025 Third Age. Building the decentralized future.
