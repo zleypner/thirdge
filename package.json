@@ -1,22 +1,33 @@
 {
   "name": "thirdge",
-  "version": "1.0.0",
-  "description": "Thirdge - Web3 Innovation for the Future",
-  "type": "module",
+  "version": "2.0.0",
+  "description": "Third Age - Web3 Innovation & Blockchain Solutions",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "keywords": [
     "web3",
     "blockchain",
     "decentralization",
-    "cyberpunk"
+    "third-age",
+    "nextjs"
   ],
-  "author": "Thirdge",
+  "author": "Third Age",
   "license": "MIT",
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
+    "typescript": "^5.4.0"
   }
 }

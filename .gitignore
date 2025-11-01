@@ -10,9 +10,19 @@ pnpm-debug.log*
 # yarn.lock
 # pnpm-lock.yaml
 
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+*.tsbuildinfo
+next-env.d.ts
+
 # Environment variables
 .env
-.env.local
+.env*.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -25,13 +35,6 @@ pnpm-debug.log*
 *~
 .DS_Store
 
-# Build output
-dist/
-build/
-out/
-.next/
-.cache/
-
 # Logs
 logs/
 *.log
@@ -43,4 +46,16 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Testing
+coverage/
+.nyc_output/
+
+# Vercel
+.vercel
+
+# Old vanilla files (keeping for reference)
+index.html
+styles.css
+script.js
 
