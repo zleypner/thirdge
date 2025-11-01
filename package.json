@@ -1,0 +1,22 @@
+{
+  "name": "thirdge",
+  "version": "1.0.0",
+  "description": "Thirdge - Web3 Innovation for the Future",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "web3",
+    "blockchain",
+    "decentralization",
+    "cyberpunk"
+  ],
+  "author": "Thirdge",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
