@@ -25,6 +25,20 @@ html {
     scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 body {
     font-family: var(--font-body);
     background-color: var(--black);
@@ -131,6 +145,7 @@ body {
         radial-gradient(circle at 20% 50%, rgba(0, 225, 255, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 50%, rgba(0, 225, 255, 0.1) 0%, transparent 50%);
     animation: pulse 8s ease-in-out infinite;
+    will-change: opacity;
 }
 
 .hero-bg-overlay {
@@ -141,6 +156,7 @@ body {
     background-size: 50px 50px;
     opacity: 0.1;
     animation: grid-move 20s linear infinite;
+    will-change: transform;
 }
 
 .hero-content {
@@ -156,6 +172,7 @@ body {
     margin-bottom: 1rem;
     letter-spacing: 15px;
     animation: glow-pulse 3s ease-in-out infinite;
+    will-change: text-shadow;
 }
 
 .glow-text {
@@ -272,6 +289,7 @@ body {
     position: relative;
     transition: all 0.4s ease;
     overflow: hidden;
+    will-change: transform, border-color;
 }
 
 .service-card::before {
@@ -356,6 +374,7 @@ body {
         radial-gradient(circle, rgba(0, 225, 255, 0.05) 2px, transparent 2px);
     background-size: 40px 40px;
     animation: grid-move 30s linear infinite;
+    will-change: transform;
 }
 
 .devconnect-content {
@@ -464,6 +483,7 @@ body {
         radial-gradient(circle at 30% 50%, rgba(0, 225, 255, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 70% 50%, rgba(0, 225, 255, 0.15) 0%, transparent 50%);
     animation: pulse 6s ease-in-out infinite;
+    will-change: opacity;
 }
 
 .why-title {
@@ -551,21 +571,21 @@ body {
 
 @keyframes grid-move {
     0% {
-        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate(50px, 50px);
+        transform: translate3d(50px, 50px, 0);
     }
 }
 
 @keyframes fade-in {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translate3d(0, 30px, 0);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -634,6 +654,7 @@ body {
 .fade-in {
     opacity: 0;
     animation: fade-in 1s ease forwards;
+    will-change: opacity, transform;
 }
 
 .fade-in-delay-1 {
@@ -646,4 +667,9 @@ body {
 
 .fade-in-delay-3 {
     animation-delay: 0.6s;
+}
+
+/* Performance optimization: Remove will-change after animation completes */
+.fade-in.animation-complete {
+    will-change: auto;
 }

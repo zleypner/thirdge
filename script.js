@@ -1,4 +1,12 @@
 // ===================================
+// LAZY LOADING STATE
+// ===================================
+
+let particlesLoaded = false;
+let cursorGlowLoaded = false;
+let hasInteracted = false;
+
+// ===================================
 // SMOOTH SCROLL & NAVBAR BEHAVIOR
 // ===================================
 
@@ -16,11 +24,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Navbar background on scroll (optimized with requestAnimationFrame)
 const navbar = document.querySelector('.navbar');
 let lastScroll = 0;
+let ticking = false;
 
-window.addEventListener('scroll', () => {
+function updateNavbar() {
     const currentScroll = window.pageYOffset;
 
     if (currentScroll > 100) {
@@ -32,7 +41,20 @@ window.addEventListener('scroll', () => {
     }
 
     lastScroll = currentScroll;
-});
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
+    }
+
+    // Mark that user has interacted
+    if (!hasInteracted) {
+        hasInteracted = true;
+    }
+}, { passive: true });
 
 // ===================================
 // INTERSECTION OBSERVER FOR ANIMATIONS
@@ -47,6 +69,12 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
+            
+            // Remove will-change after animation completes for better performance
+            entry.target.addEventListener('animationend', () => {
+                entry.target.classList.add('animation-complete');
+            }, { once: true });
+            
             observer.unobserve(entry.target);
         }
     });
@@ -66,21 +94,31 @@ serviceCards.forEach((card, index) => {
 });
 
 // ===================================
-// PARALLAX EFFECT FOR HERO SECTION
+// PARALLAX EFFECT FOR HERO SECTION (Optimized)
 // ===================================
 
 const heroSection = document.querySelector('.hero-section');
 const heroContent = document.querySelector('.hero-content');
+let parallaxTicking = false;
 
-window.addEventListener('scroll', () => {
+function updateParallax() {
     const scrolled = window.pageYOffset;
     const parallaxSpeed = 0.5;
 
     if (heroSection && scrolled < window.innerHeight) {
-        heroContent.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+        // Use transform for better performance
+        heroContent.style.transform = `translate3d(0, ${scrolled * parallaxSpeed}px, 0)`;
         heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
     }
-});
+    parallaxTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!parallaxTicking && window.pageYOffset < window.innerHeight) {
+        window.requestAnimationFrame(updateParallax);
+        parallaxTicking = true;
+    }
+}, { passive: true });
 
 // ===================================
 // GLITCH EFFECT ON TITLE (OPTIONAL)
@@ -124,47 +162,87 @@ window.addEventListener('load', () => {
 });
 
 // ===================================
-// CURSOR GLOW EFFECT (OPTIONAL)
+// CURSOR GLOW EFFECT (LAZY LOADED)
 // ===================================
 
-const cursor = document.createElement('div');
-cursor.className = 'cursor-glow';
-document.body.appendChild(cursor);
+function initCursorGlow() {
+    if (cursorGlowLoaded || window.innerWidth <= 768) return;
+    
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-glow';
+    document.body.appendChild(cursor);
 
-// Add cursor glow CSS dynamically
-const cursorStyle = document.createElement('style');
-cursorStyle.textContent = `
-    .cursor-glow {
-        position: fixed;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0, 225, 255, 0.6) 0%, transparent 70%);
-        pointer-events: none;
-        transition: transform 0.1s ease;
-        z-index: 9999;
-        mix-blend-mode: screen;
-        transform: translate(-50%, -50%);
-    }
-
-    @media (max-width: 768px) {
+    // Add cursor glow CSS dynamically
+    const cursorStyle = document.createElement('style');
+    cursorStyle.textContent = `
         .cursor-glow {
-            display: none;
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 225, 255, 0.6) 0%, transparent 70%);
+            pointer-events: none;
+            will-change: transform;
+            z-index: 9999;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
         }
-    }
-`;
-document.head.appendChild(cursorStyle);
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
+        @media (max-width: 768px) {
+            .cursor-glow {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cursor-glow {
+                display: none;
+            }
+        }
+    `;
+    document.head.appendChild(cursorStyle);
+
+    let cursorX = 0;
+    let cursorY = 0;
+    let cursorTicking = false;
+
+    function updateCursor() {
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        cursorTicking = false;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        
+        if (!cursorTicking) {
+            window.requestAnimationFrame(updateCursor);
+            cursorTicking = true;
+        }
+    }, { passive: true });
+
+    cursorGlowLoaded = true;
+}
+
+// Initialize cursor glow after user interaction
+document.addEventListener('mousemove', () => {
+    if (!cursorGlowLoaded) {
+        initCursorGlow();
+    }
+}, { once: true, passive: true });
 
 // ===================================
-// PARTICLE BACKGROUND EFFECT
+// PARTICLE BACKGROUND EFFECT (LAZY LOADED)
 // ===================================
 
 function createParticles() {
+    if (particlesLoaded) return;
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const particleContainer = document.createElement('div');
     particleContainer.className = 'particle-container';
     particleContainer.style.cssText = `
@@ -191,11 +269,12 @@ function createParticles() {
             opacity: 0;
             animation: float linear infinite;
             box-shadow: 0 0 4px #00E1FF;
+            will-change: transform, opacity;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(0) translateX(0);
+                transform: translate3d(0, 0, 0);
                 opacity: 0;
             }
             10% {
@@ -205,15 +284,24 @@ function createParticles() {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) translateX(var(--x-offset));
+                transform: translate3d(var(--x-offset), -100vh, 0);
                 opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .particle {
+                display: none;
             }
         }
     `;
     document.head.appendChild(particleStyle);
 
-    // Create particles
-    for (let i = 0; i < 30; i++) {
+    // Reduce particle count on mobile for better performance
+    const particleCount = window.innerWidth <= 768 ? 15 : 30;
+
+    // Create particles with staggered loading
+    for (let i = 0; i < particleCount; i++) {
         setTimeout(() => {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -222,12 +310,30 @@ function createParticles() {
             particle.style.animationDelay = Math.random() * 5 + 's';
             particle.style.setProperty('--x-offset', (Math.random() * 200 - 100) + 'px');
             particleContainer.appendChild(particle);
-        }, i * 100);
+        }, i * 50); // Faster loading but still staggered
+    }
+
+    particlesLoaded = true;
+}
+
+// Initialize particles after a delay or on user interaction
+function initParticlesLazy() {
+    // Wait for initial page load and user interaction
+    if (document.readyState === 'complete') {
+        setTimeout(() => {
+            createParticles();
+        }, 1000); // Delay 1 second after page load
+    } else {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                createParticles();
+            }, 1000);
+        });
     }
 }
 
-// Initialize particles on load
-window.addEventListener('load', createParticles);
+// Start lazy loading particles
+initParticlesLazy();
 
 // ===================================
 // BUTTON HOVER SOUND EFFECT (OPTIONAL)
