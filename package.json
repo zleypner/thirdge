@@ -1,7 +1,7 @@
 {
   "name": "thirdge",
   "version": "2.0.0",
-  "description": "Third Age - Web3 Innovation & Blockchain Solutions",
+  "description": "Thirdge - Web3 Innovation & Blockchain Solutions",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,10 +12,10 @@
     "web3",
     "blockchain",
     "decentralization",
-    "third-age",
+    "thirdge",
     "nextjs"
   ],
-  "author": "Third Age",
+  "author": "Thirdge",
   "license": "MIT",
   "dependencies": {
     "next": "^14.2.0",

@@ -1,8 +1,8 @@
-# Third Age - Web3 Innovation & Blockchain Solutions
+# Thirdge - Web3 Innovation & Blockchain Solutions
 
-Third Age is a pioneering Web3 company dedicated to building the decentralized future through innovative products, professional services, and blockchain education.
+Thirdge is a pioneering Web3 company dedicated to building the decentralized future through innovative products, professional services, and blockchain education.
 
-## About Third Age
+## About Thirdge
 
 We empower individuals and organizations to embrace the decentralized economy by:
 
@@ -193,8 +193,8 @@ You can also deploy to:
 
 ## Contact
 
-For inquiries about Third Age services, blockchain education programs, or partnership opportunities, use the contact button on the website or reach out directly.
+For inquiries about Thirdge services, blockchain education programs, or partnership opportunities, use the contact button on the website or reach out directly.
 
 ---
 
-© 2025 Third Age. Building the decentralized future.
+© 2025 Thirdge. Building the decentralized future.

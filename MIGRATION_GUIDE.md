@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Third Age website has been successfully migrated from a vanilla HTML/CSS/JavaScript setup to a modern Next.js 14 application with TypeScript and React. This guide explains the changes and improvements.
+The Thirdge website has been successfully migrated from a vanilla HTML/CSS/JavaScript setup to a modern Next.js 14 application with TypeScript and React. This guide explains the changes and improvements.
 
 ## What Changed
 
@@ -221,6 +221,7 @@ For questions about the migration or Next.js features, refer to:
 ---
 
 **Migration completed**: November 1, 2025
-**Migrated by**: Third Age Development Team
+**Migrated by**: Thirdge Development Team
+
 
 

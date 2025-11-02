@@ -33,7 +33,7 @@ export default function Navigation() {
   return (
     <nav className="navbar" style={navStyle}>
       <div className="nav-container">
-        <div className="logo">THIRD AGE</div>
+        <div className="logo">THIRDGE</div>
         <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><a href="#services" onClick={(e) => scrollToSection(e, '#services')}>Services</a></li>
           <li><a href="#products" onClick={(e) => scrollToSection(e, '#products')}>Products</a></li>
@@ -52,5 +52,6 @@ export default function Navigation() {
     </nav>
   )
 }
+
 
 

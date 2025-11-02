@@ -35,12 +35,13 @@ export default function DevConnect() {
       <div className="devconnect-content">
         <h2 className="section-title glow-text">DEVCONNECT + HACKATHON</h2>
         <p className="devconnect-text">
-          Third Age attended DevConnect to keep improving and building what&apos;s next. 
+          Thirdge attended DevConnect to keep improving and building what&apos;s next. 
           Currently participating in a hackathon, building disruptive decentralized products.
         </p>
       </div>
     </section>
   )
 }
+
 
 

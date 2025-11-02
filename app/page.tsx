@@ -13,7 +13,7 @@ import ParticleBackground from '@/components/ParticleBackground'
 export default function Home() {
   useEffect(() => {
     // Console message
-    console.log('%c🚀 Welcome to Third Age - Building the Decentralized Future',
+    console.log('%c🚀 Welcome to Thirdge - Building the Decentralized Future',
       'color: #00E1FF; font-size: 16px; font-weight: bold; text-shadow: 0 0 10px #00E1FF;')
     console.log('%cWeb3 Innovation for the Future',
       'color: #00E1FF; font-size: 12px;')
@@ -32,5 +32,6 @@ export default function Home() {
     </>
   )
 }
+
 
 

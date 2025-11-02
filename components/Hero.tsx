@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 
 export default function Hero() {
-  const [glitchText, setGlitchText] = useState('THIRD AGE')
+  const [glitchText, setGlitchText] = useState('THIRDGE')
   const heroContentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Hero() {
 
     // Glitch effect
     const createGlitchEffect = () => {
-      const originalText = 'THIRD AGE'
+      const originalText = 'THIRDGE'
       const glitchChars = '!<>-_\\/[]{}—=+*^?#________'
       let iterations = 0
       const maxIterations = 3
@@ -84,5 +84,6 @@ export default function Hero() {
     </section>
   )
 }
+
 
 
