@@ -37,10 +37,10 @@ export default function BrewFi() {
         <h2 className="brewfi-title glow-text">BREWFI</h2>
         <div className="brewfi-description">
           <p>
-            BrewFi – Web3 app that won an Avalanche Hackathon and received an investment round.
+            BrewFi — Web3 app competing for a major hackathon prize.
           </p>
           <p>
-            Users can pay for food and coffee in crypto, while restaurants earn more with smarter software.
+            We&apos;re building the future of restaurant payments.
           </p>
           <p className="brewfi-tagline">Fast. Accessible. Designed for real people.</p>
         </div>
