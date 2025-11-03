@@ -44,7 +44,7 @@ export default function BrewFi() {
           </p>
           <p className="brewfi-tagline">Fast. Accessible. Designed for real people.</p>
         </div>
-        <a href="#contact" className="cta-button">EXPLORE BREWFI</a>
+        <a href="https://brew-fi.com/" className="cta-button" target="_blank" rel="noopener noreferrer">EXPLORE BREWFI</a>
       </div>
     </section>
   )
